@@ -16,9 +16,9 @@ function AboutMe () {
 
   return (
     <Section className="about-me" title="Студент">
-      <div className="about-me__biografy">
+      <div className="about-me__biography">
         <h3 className="about-me__name">Ирина</h3>
-        <p className="about-me__profession">Фронтенд-разработчик, { ageDate() } лет</p>  
+        <p className="about-me__description">Фронтенд-разработчик, { ageDate() } лет</p>  
         <p className="about-me__text">Я живу в г.Пермь, люблю верстать сайты, учусь на веб-разработчика.</p>  
         <Link className="about-me__link" to="#">Github</Link>
         <img

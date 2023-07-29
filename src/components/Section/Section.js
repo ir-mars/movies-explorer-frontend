@@ -1,5 +1,4 @@
 import './Section.css';
-import SectionTitle from '../SectionTitle/SectionTitle';
 
 function Section ({ title, children }) {
   return (
@@ -9,4 +8,5 @@ function Section ({ title, children }) {
     </section>
   )
 }
+
 export default Section;
