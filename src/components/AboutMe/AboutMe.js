@@ -1,4 +1,4 @@
-import Section from '../Section/Section';
+import SectionTitle from '../SectionTitle/SectionTitle';
 import './AboutMe.css';
 import { Link } from 'react-router-dom';
 import myfoto from '../../images/myfoto.jpg';
@@ -6,7 +6,7 @@ import Portfolio from '../Portfolio/Portfolio';
 
 function AboutMe () {
   function ageDate() {
-    const myBirthDate = new Date(1980, 01, 11);
+    const myBirthDate = new Date(1980, 1, 11);
     const todayDate = new Date();
     const date1 = todayDate.getMonth() - myBirthDate.getMonth() >= 0 && todayDate.getDate() - myBirthDate.getDate() >= 0;
     const date2 = todayDate.getFullYear() - myBirthDate.getFullYear();
@@ -15,7 +15,8 @@ function AboutMe () {
   }
 
   return (
-    <Section className="about-me" title="Студент">
+    <section className="about-me">
+      <SectionTitle  title="Студент" />
       <div className="about-me__biography">
         <h3 className="about-me__name">Ирина</h3>
         <p className="about-me__description">Фронтенд-разработчик, { ageDate() } лет</p>  
@@ -28,7 +29,7 @@ function AboutMe () {
         />      
       </div>
       <Portfolio />
-    </Section>  
+    </section>  
   )  
 } 
 

@@ -1,9 +1,8 @@
 .about-me {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 110px 70px 101px;
+  padding: 110px 70px 110px;
   box-sizing: border-box;
-  background-color: var(--bg-color-main);
 }
 
 .about-me__biography {
@@ -19,7 +18,7 @@
     "text img"
     "link img";
   column-gap: 50px;
-  
+  font-family: 'Inter';
 }
 
 .about-me__name {

@@ -3,14 +3,15 @@ import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 
-import Header from '../Header/Header';
 import Main from '../Main/Main';
+
+{/*import Header from '../Header/Header';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Login from '../Login/Login';
 import Register from '../Register';
 import Profile from '../Profile/Profile';
-import NotFound from '../NotFound/NotFound';
+import NotFound from '../NotFound/NotFound';*/}
 
 function App () {
   return (

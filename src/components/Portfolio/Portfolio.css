@@ -1,14 +1,15 @@
 .portfolio {
   max-width: 100%;
-  margin-top: 102px;
+  margin-top: 101px;
 }
 
 .portfolio__title {
   margin: 0;
   font-size: 18px;
-  line-height: 1.11;
+  line-height: 20px;
   font-weight: 400;
-  color: black; 
+  font-style: normal;
+  color: rgba(160, 160, 160, 1); 
 }
 
 .portfolio__list {
@@ -21,7 +22,7 @@
 .portfolio__list-item {
   padding-top: 15px;
   padding-bottom: 14px;
-  border-bottom: 1px solid grey;  
+  border-bottom: 1px solid rgba(230, 230, 230, 1);  
 }
 
 .portfolio__list-item:last-of-type {
