@@ -10,10 +10,10 @@
   letter-spacing: -0.04em;
   color: black;
 }
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 536px) {
   .section-title {
     font-size: 18px;
     line-height: 22px;
-    padding-bottom: 27px;
+    padding-bottom: 28px;
   }
 }

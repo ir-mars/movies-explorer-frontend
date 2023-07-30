@@ -16,7 +16,9 @@ function AboutMe () {
 
   return (
     <section className="about-me">
+    <div className="about-me__container">
       <SectionTitle  title="Студент" />
+      
       <div className="about-me__biography">
         <h3 className="about-me__name">Ирина</h3>
         <p className="about-me__description">Фронтенд-разработчик, { ageDate() } лет</p>  
@@ -29,6 +31,7 @@ function AboutMe () {
         />      
       </div>
       <Portfolio />
+    </div>        
     </section>  
   )  
 } 
