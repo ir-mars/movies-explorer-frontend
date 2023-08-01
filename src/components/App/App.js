@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 
-import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+
 
 {/*import Header from '../Header/Header';
+import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Login from '../Login/Login';
@@ -17,8 +19,10 @@ function App () {
   return (
     <div className="page">
       <Routes>
-        <Route path="/" element={<Main />} />
-        {/* 
+        <Route path="/movies" element={<Movies />} />
+        
+        {/*
+        <Route path="/" element={<Main />} /> 
         <Route path="/profile" element={<Profile />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
