@@ -1,20 +1,23 @@
-/*import { useEffect, useState } from 'react';*/
+import { useEffect, useState } from 'react';
+import { useLocation } from "react-router-dom";
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import film1 from '../../images/film1.png';
 import film2 from '../../images/film2.png';
 import film3 from '../../images/film3.png';
 
-function MoviesCardList () {
-      
+function MoviesCardList ({ films }) {
+  const location = useLocation();
+  
   return (
     <section className="movies-list" aria-label="Секция с карточками фильмов">
-      <ul className="movies-card__list">
+      <ul className="movies-card__list"> 
         <MoviesCard
           nameRU="«Роллинг Стоунз» в изгнании"
           image={film1}
           duration="120"
-        /> {/*
+          films={films}
+        /> 
         <MoviesCard
           nameRU="All Tomorrow's Parties"
           image={film2}
@@ -44,7 +47,7 @@ function MoviesCardList () {
           nameRU="«Роллинг Стоунз» в изгнании"
           image={film3}
           duration="120"
-        />
+        /> {/*
         <MoviesCard
           nameRU="All Tomorrow's Parties"
           image={film2}
@@ -74,9 +77,12 @@ function MoviesCardList () {
           nameRU="«Роллинг Стоунз» в изгнании"
           image={film3}
           duration="120"
-        /> */}               
+      /> */}               
       </ul>
-      <button className="movies-card__button">Ещё</button>
+      {location.pathname=== "/movies" ? (
+        <button className="movies-card__button">Ещё</button>
+      ) : ("")
+      }
     </section>  
   )  
 }

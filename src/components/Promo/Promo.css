@@ -80,7 +80,7 @@
 }
 
 .promo__link:hover {
-  background-color: blue;  
+  opacity: 0.8;  
 }
 
 .promo__img {

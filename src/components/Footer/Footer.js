@@ -9,10 +9,10 @@ function Footer () {
         <p className="footer__copyright">&copy; {new Date().getFullYear()}</p>
         <ul className="footer__links">
           <li className="footer__nav-link">
-            <Link className="footer__link" to="#">Яндекс.Практикум</Link>  
+            <Link className="footer__link" to="https://practicum.yandex.ru">Яндекс.Практикум</Link>  
           </li>
           <li className="footer__nav-link">
-          <Link className="footer__link" to="#">Github</Link>  
+          <Link className="footer__link" to="https://github.com">Github</Link>  
           </li>
         </ul>  
       </div>

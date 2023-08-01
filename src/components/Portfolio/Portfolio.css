@@ -35,10 +35,15 @@
   font-weight: 400;
   font-size: 30px;
   letter-spacing: -0.04em;
-  color: var(--white);
   text-decoration: none;
-  transition: var(--opacity);
+  transition: 0.5s ease;
+  color: black;
 }
+
+.portfolio__link:hover {
+  opacity: 0.5;
+}
+
 
 .portfolio__text {
   margin: 0;

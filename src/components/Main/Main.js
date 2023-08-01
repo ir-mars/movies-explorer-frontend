@@ -13,7 +13,7 @@ function Main () {
       <Tech />
       <AboutMe />
       <Footer />
-    </main>  
+    </main>    
   )  
 }
 
