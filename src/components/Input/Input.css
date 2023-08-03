@@ -7,12 +7,12 @@
     font-size: 14px;
     line-height: 17px;
     color: black;
-    background-color: rgba(249, 249, 249, 1);
+    border-bottom: 1px solid #E8E8E8;
   }
   
   .input:focus {
     font-weight: 500;
-    border-bottom: 1px solid rgba(52, 86, 243, 1);
+    border-bottom: 1px solid black;
     padding: 5px 0 8px;
   }
 

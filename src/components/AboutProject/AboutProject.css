@@ -50,7 +50,12 @@
   line-height: 24px;
   font-style: normal;
   font-weight: 400;
-  letter-spacing: -0.04em;    
+  letter-spacing: -0.04em;
+  color: black;    
+}
+
+.about-project__table-subtitle_type_first {
+  color: white;
 }
 
 @media screen and (max-width: 536px) {
@@ -95,7 +100,7 @@
 
 .about-project__table:first-of-type {
   width: 20%;
-  background-color: rgba(43, 224, 128, 1);
+  background-color: black;
 }
 
 .about-project__table:last-of-type {
@@ -122,7 +127,11 @@
   line-height: 17px;
   font-weight: 400;
   text-align: center;
-  color: black;      
+  color: white;      
+}
+
+.about-project__table-subtitle_type-two {
+  color: black;
 }
 
 @media screen and (max-width: 536px) {
@@ -140,7 +149,7 @@
   font-style: normal;
   font-weight: 500;
   text-align: center;
-  color: grey;
+  color: #A0A0A0;
   background-color: rgba(255, 255, 255, 1);  
 }
 

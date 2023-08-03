@@ -54,12 +54,12 @@
 }
 
 .movies-card__button {
-  max-width: 1140px;
-  width: 100%;/*height: 166px;*/
+  width: 320px;
+  height: 36px;
   border-radius: 6px;
   border: none;
-  background-color: rgba(249, 249, 249, 1);
-  margin: 50px 0 80px;
+  background-color: #F9F9F9;
+  margin: 59px auto 80px;
   padding: 11px 0 9px 0;  
   font-style: normal;
   font-weight: 500;
@@ -74,4 +74,10 @@
 
 .movies-card__button:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (max-width: 536px) {
+  .movies-card__button {
+    width: 240px;
+  }
 }

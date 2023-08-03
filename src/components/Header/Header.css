@@ -77,15 +77,12 @@
 }
 
 /*ГЛАВНАЯ СТРАНИЦА*/
-.header__wrapper_main {
-  background-color: rgba(7, 48, 66, 1);
-}
 /*ссылка "регистрация"*/
 .header__link_reg {
   font-size: 12px;
   line-height: 16px;
   margin-right: 30px;
-  color: white;
+  color: black;
 }
 
 @media screen and (max-width: 536px) {
@@ -95,12 +92,12 @@
   }
 }
 
-/*кнопка "войти"(зеленая)*/
+/*кнопка "войти"(черная)*/
 .header__link_btn {
   margin: 0;
   padding: 8px 20px;
-  background-color: #2BE080;;
-  color: black;
+  background-color: black;;
+  color: white;
   border-radius: 3px;
 }
 
@@ -122,6 +119,7 @@
   font-size: 14px;
   line-height: 16px;
   margin-right: 0;
+  color: black;
 }
 
 /*иконка человечка*/

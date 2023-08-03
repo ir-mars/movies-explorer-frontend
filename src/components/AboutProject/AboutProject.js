@@ -22,7 +22,7 @@ function AboutProject () {
             <p className="about-project__table-text">Back-end</p>  
           </div>
           <div className="about-project__table">
-            <p className="about-project__table-subtitle">4 недели</p>
+            <p className="about-project__table-subtitle about-project__table-subtitle_type-two">4 недели</p>
             <p className="about-project__table-text">Front-end</p>  
           </div>  
         </div>

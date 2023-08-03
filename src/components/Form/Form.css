@@ -21,7 +21,7 @@
   margin-top: 20px;
   border: none;
   border-radius: 3px;
-  background-color: rgba(52, 86, 243, 1);
+  background-color: black;
   cursor: pointer;
   transition: all 0.5s ease;
   font-size: 14px;
@@ -43,7 +43,7 @@
 }
 
 .form__input:focus-visible {
-  border-bottom: 1px solid rgba(52, 86, 243, 1);
+  border-bottom: 1px solid black;
 }
 
 .form__errors-wrapper {
