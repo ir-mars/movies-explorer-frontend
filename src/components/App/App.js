@@ -13,19 +13,17 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import Preloader from "../Preloader/Preloader";
 
-{/*
-
-*/}
-
 function App () {
-  const [isLoading, setIsLoading] = useState(false);
-  const [menuOpened, setMenuOpened] = useState(false);
   const location = useLocation();
-  const showHeaderPaths = ['/', '/movies', '/saved-movies', '/profile']; 
-  const showHeader = showHeaderPaths.includes(location.pathname); 
+  const [isLoading, setIsLoading] = useState(false);
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
+  
+  const showPathsOfHeader = ['/', '/movies', '/saved-movies', '/profile']; 
+  const showHeader = showPathsOfHeader.includes(location.pathname);
+   
 
   const handleMenuOpened = (value) => {
-    setMenuOpened(value)
+    setIsMenuOpened(value)
   }
   
   function handleRegister () {
@@ -36,7 +34,7 @@ function App () {
   
   return (
     <div className="page">
-      {showHeader && <Header menuOpened={menuOpened} handleMenuOpened={handleMenuOpened} />}
+      {showHeader && <Header menuOpened={isMenuOpened} handleMenuOpened={handleMenuOpened} />}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />

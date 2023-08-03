@@ -22,10 +22,10 @@ function Header ({ menuOpened, handleMenuOpened }) {
         
         <Route path="*" element={
           <div className="header__wrapper">
-            <nav className="header__nav-links header__nav-links_hidden_tab-mobile">            
+            <nav className="header__nav-links header__hidden_tab-mobile">            
               <img className="header__logo" src={logo} alt="логотип в виде черного круга с белой иконкой" />              
             </nav>
-            <nav className="header__nav-links header__nav-links_hidden_tab-mobile">
+            <nav className="header__nav-links header__hidden_tab-mobile">
               <Link to="/movies" className="header__link">
                 Фильмы
               </Link>
@@ -38,7 +38,7 @@ function Header ({ menuOpened, handleMenuOpened }) {
               </Link>
             </nav>  
 
-            <nav className="header__nav-links header__nav-links_hidden_pc">
+            <nav className="header__nav-links header__hidden_pc">
               <img className="header__logo" src={logo} alt="логотип" />
               <button className={`header__burger-btn ${menuOpened ? "header__burger-btn_close" : ''}`} onClick={() => handleMenuOpened(!menuOpened)}>
               </button>

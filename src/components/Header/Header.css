@@ -60,18 +60,18 @@
   }
 }
 
-.header__nav-links_hidden_pc {
+.header__hidden_pc {
   width: 100%;
 }
 
 @media screen and (min-width: 821px) {
-  .header__nav-links_hidden_pc {
+  .header__hidden_pc {
     display: none;
   }
 }
 
 @media screen and (max-width: 820px) {
-  .header__nav-links_hidden_tab-mobile {
+  .header__hidden_tab-mobile {
     display: none;
   }
 }

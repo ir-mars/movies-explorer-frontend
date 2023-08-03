@@ -23,8 +23,8 @@ function AuthForm ({
   }
 
   return (
-    <div className={`auth auth_type_${name}`}>
-      <div className="auth__wrapper">
+    <div className={`authform authform_type_${name}`}>
+      <div className="authform__wrapper">
         <form 
           action="#"
           name={name}
