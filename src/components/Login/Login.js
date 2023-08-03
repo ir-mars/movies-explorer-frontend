@@ -2,17 +2,21 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import logo from '../../images/logo.svg';
-import Form from '../Form/Form';
+import AuthForm from '../Form/Form';
 import Input from '../Input/Input';
 
 function Login () {
+  
   const [values, setValues] = useState({})
   
   function onSubmit () {
   }
   
   function handleChange (e) {
-    setValues({ ...values, [e.target.name]: e.target.value })
+    setValues({      
+      ...values,
+      [e.target.name]: e.target.value
+    })
   }
 
   return (
@@ -20,11 +24,11 @@ function Login () {
       <div className="auth__wrapper">
         <img className="logo__image" src={logo} alt="логотип" />
         <h2 className="auth__title">Рады видеть!</h2>
-        <Form
+        <AuthForm
           name="login"
-          buttonText="Войти"
           onSubmit={onSubmit}
           onChange={handleChange}
+          buttonText="Войти"
         >
           <Input
             type="email"
@@ -34,6 +38,7 @@ function Login () {
             maxLength={30}
             label="E-mail"
             defaultValue="email@yandex.ru"
+            autoComplete="user-email"
           />
           <Input
             type="password"
@@ -42,8 +47,9 @@ function Login () {
             minLength={6}
             maxLength={30}
             label="Пароль"
+            autoComplete="current-password"
           />
-        </Form>
+        </AuthForm>
         <p className="auth__text">
           Ещё не зарегистрированы?{" "}
           <Link to="/sign-up" className="auth__link">

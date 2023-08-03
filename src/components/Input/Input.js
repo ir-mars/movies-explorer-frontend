@@ -11,7 +11,7 @@ function Input ({
   defaultValue,
   defaultError = false,
   autoFocus = false,
-
+  autoComplete
 }) {
     
   const [error, setError] = useState(false);
@@ -36,6 +36,7 @@ function Input ({
         defaultValue={defaultValue || ""}
         autoFocus={autoFocus}
         onChange={handleChange}
+        autoComplete={autoComplete}
       />
       <span
         className={`label__error ${error || defaultError ? "label__error_active" : ""}`}

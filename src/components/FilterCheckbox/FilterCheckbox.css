@@ -1,16 +1,16 @@
-.checkbox {
+.filter-checkbox {
   grid-column-start: 1;
   grid-column-end: 3;
   display: inline-flex;
   justify-content: center;
 }
 
-.checkbox__toggle {
+.checkbox__toggle-container {
   padding-top: 14px;
   padding-bottom: 14px;
 }
   
-.checkbox__toggle-label {
+.checkbox__toggle {
   color: #000000;
   font-weight: 400;
   font-size: 12px;
@@ -21,7 +21,7 @@
   cursor: pointer;
 }
   
-.checkbox__toggle-checkbox-invisible {
+.checkbox__toggle_checkbox-off {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -29,7 +29,7 @@
   clip: rect(0 0 0 0);
 }
   
-.checkbox__toggle-checkbox-visible {
+.checkbox__toggle_checkbox-on {
   display: block;
   width: 34px;
   height: 16px;
@@ -39,7 +39,7 @@
   position: relative;
 }
   
-.checkbox__toggle-checkbox-visible::after {
+.checkbox__toggle_checkbox-on::after {
   content: '';
   width: 12px;
   height: 12px;
@@ -51,11 +51,11 @@
   transition: all 0.2s ease;
 }
   
-.checkbox__toggle-checkbox-visible_checked {
+.checkbox__toggle_checkbox-on_checked {
   background-color: #2be080;
 }
   
-  .checkbox__toggle-checkbox-visible_checked::after {
+  .checkbox__toggle_checkbox-on_checked::after {
     background-color: white;
     left: 22px;
   }
@@ -70,11 +70,9 @@
     bottom: 10px;
     left: 26px;
   }
-  
- 
-  
+    
   @media screen and (max-width: 530px) {
-    .checkbox__toggle-label {
+    .checkbox__toggle {
       font-size: 11px;
       column-gap: 13px;
     }

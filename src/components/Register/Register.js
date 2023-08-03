@@ -2,29 +2,33 @@ import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import './Register.css';
 import logo from '../../images/logo.svg';
-import Form from '../Form/Form';
+import AuthForm from '../Form/Form';
 import Input from '../Input/Input';
 
 function Register () {
+  
   const [values, setValues] = useState({});
   
   function onSubmit () {
   }
   
   function handleChange (e) {
-    setValues({ ...values, [e.target.name]: e.target.value })
+    setValues({
+       ...values,
+       [e.target.name]: e.target.value
+      })
   }
 
   return (
     <section className="auth">
-      <div className="auth_wrapper">
+      <div className="auth__wrapper">
         <img className="logo__image" src={logo} alt="логотип" />      
         <h2 className="auth__title">Добро пожаловать!</h2>   
-        <Form
-          name="login"
-          buttonText="Зарегистрироваться"
+        <AuthForm
+          name="reg"
           onSubmit={onSubmit}
           onChange={handleChange}
+          buttonText="Зарегистрироваться"
         >
           <Input
             type="text"
@@ -34,6 +38,7 @@ function Register () {
             maxLength={30}
             label="Имя"
             defaultValue="Виталий"
+            autoComplete="user-name"
           />
           <Input
             type="email"
@@ -43,7 +48,7 @@ function Register () {
             maxLength={30}
             label="E-mail"
             defaultValue="email@yandex.ru"
-            /*autoFocus={true}*/
+            autoComplete="user-email"
           />
           <Input
             type="password"
@@ -54,8 +59,9 @@ function Register () {
             label="Пароль"
             defaultValue="password777"
             defaultError={true}
+            autoComplete="user-password"
           />
-        </Form>
+        </AuthForm>
         <p className="auth__text">
           Уже зарегистрированы?{" "}
           <Link to="/sign-in" className="auth__link">
