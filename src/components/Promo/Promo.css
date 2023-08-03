@@ -46,7 +46,10 @@
   align-content: center;
   justify-content: center;
   background-color: black;
-  gap: 40px;  
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;  
 }
 
 @media screen and (max-width: 536px) {

@@ -29,7 +29,7 @@ function Form ({
       className={`form form_type_${name}`}
       noValidate
       onSubmit={handleSubmit}
-      onChange={handleChange}
+      onChange={handleChange}      
     >
       <div>
         {children}

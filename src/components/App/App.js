@@ -10,19 +10,19 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 /*import NotFound from '../NotFound/NotFound';*/
 import Register from '../Register/Register';
 import Login from '../Login/Login';
-
+import Profile from '../Profile/Profile';
 import Preloader from "../Preloader/Preloader";
 
 {/*
-import Profile from '../Profile/Profile';
+
 */}
 
 function App () {
   const [isLoading, setIsLoading] = useState(false);
   const [menuOpened, setMenuOpened] = useState(false);
   const location = useLocation();
-  const showHeaderPaths = ['/', '/movies', '/saved-movies', '/profile']; // пути, на которых нужно отобразить Header
-  const showHeader = showHeaderPaths.includes(location.pathname); // проверяем, соответствует ли текущий путь одному из путей для отображения Header
+  const showHeaderPaths = ['/', '/movies', '/saved-movies', '/profile']; 
+  const showHeader = showHeaderPaths.includes(location.pathname); 
 
   const handleMenuOpened = (value) => {
     setMenuOpened(value)
@@ -43,10 +43,8 @@ function App () {
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/sign-up" element={<Register onRegister={handleRegister} isLoading={isLoading} />} />
         <Route path="/sign-in" element={<Login onLogin={handleLogin} isLoading={isLoading} />} />
-        
-        {/*
-         
         <Route path="/profile" element={<Profile />} />
+        {/*
         <Route path="/sign-out" element={<SignOut onLoggedIn={setLoggedIn} />} />
         <Route path="*" element={<NotFound />} />
          */} 
