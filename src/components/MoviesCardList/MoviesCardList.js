@@ -17,6 +17,11 @@ function MoviesCardList ({ films }) {
           image={film1}
           duration="120"
           films={films}
+        />
+        <MoviesCard
+          nameRU="All Tomorrow's Parties"
+          image={film3}
+          duration="120"
         /> 
         <MoviesCard
           nameRU="All Tomorrow's Parties"
@@ -27,57 +32,13 @@ function MoviesCardList ({ films }) {
           nameRU="Без обратного пути"
           image={film1}
           duration="120"
-        />
-        <MoviesCard
-          nameRU="All Tomorrow's Parties"
-          image={film3}
-          duration="120"
-        />{}
+        />        
         <MoviesCard
           nameRU="«Роллинг Стоунз» в изгнании"
           image={film2}
           duration="48"
         />
-        <MoviesCard
-          nameRU="Без обратного пути"
-          image={film1}
-          duration="135"
-        />
-        <MoviesCard
-          nameRU="«Роллинг Стоунз» в изгнании"
-          image={film3}
-          duration="120"
-        /> {/*
-        <MoviesCard
-          nameRU="All Tomorrow's Parties"
-          image={film2}
-          duration="120"
-        />
-        <MoviesCard
-          nameRU="Без обратного пути"
-          image={film1}
-          duration="140"
-        />
-        <MoviesCard
-          nameRU="All Tomorrow's Parties"
-          image={film3}
-          duration="65"
-        />
-        <MoviesCard
-          nameRU="«Роллинг Стоунз» в изгнании"
-          image={film2}
-          duration="48"
-        />
-        <MoviesCard
-          nameRU="Без обратного пути"
-          image={film1}
-          duration="135"
-        />
-        <MoviesCard
-          nameRU="«Роллинг Стоунз» в изгнании"
-          image={film3}
-          duration="120"
-      /> */}               
+                       
       </ul>
       {location.pathname=== "/movies" ? (
         <button className="movies-card__button">Ещё</button>

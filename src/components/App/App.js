@@ -7,7 +7,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-/*import NotFound from '../NotFound/NotFound';*/
+import NotFound from '../NotFound/NotFound';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
@@ -44,9 +44,10 @@ function App () {
         <Route path="/sign-up" element={<Register onRegister={handleRegister} isLoading={isLoading} />} />
         <Route path="/sign-in" element={<Login onLogin={handleLogin} isLoading={isLoading} />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<NotFound />} />
         {/*
         <Route path="/sign-out" element={<SignOut onLoggedIn={setLoggedIn} />} />
-        <Route path="*" element={<NotFound />} />
+        
          */} 
       </Routes>
     </div>  

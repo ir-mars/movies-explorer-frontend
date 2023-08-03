@@ -17,7 +17,7 @@ function Login () {
 
   return (
     <section className="auth">
-      <div className="auth_wrapper">
+      <div className="auth__wrapper">
         <img className="logo__image" src={logo} alt="логотип" />
         <h2 className="auth__title">Рады видеть!</h2>
         <Form
