@@ -2,7 +2,7 @@ import './FilterCheckbox.css';
 import { useState } from 'react';
 
 const FilterCheckbox = () => {
-  const [isToggle, setIsToggle] = useState(true);
+  const [isToggleOn, setIsToggleOn] = useState(true);
 
   return (
     <div className='checkbox'>
@@ -12,12 +12,12 @@ const FilterCheckbox = () => {
           <input
             className='checkbox__toggle-checkbox-invisible'
             type='checkbox'
-            name='short-films'
-            id='short-films'
-            checked={isToggle}
+            name='toggle'
+            id='toggle'
+            checked={isToggleOn}
             onChange={() => setIsToggle(!isToggle)}
           />
-          <span className={`checkbox__toggle-checkbox-visible ${isToggle && 'checkbox__toggle-checkbox-visible_checked'}`} />
+          <span className={`checkbox__toggle-checkbox-visible ${isToggleOn && 'checkbox__toggle-checkbox-visible_checked'}`} />
           
         </label>
       </div>
