@@ -8,6 +8,7 @@ function Input ({
   minLength,
   maxLength,
   label,
+  placeholder,
   defaultValue,
   defaultError = false,
   autoFocus = false,
@@ -37,6 +38,7 @@ function Input ({
         autoFocus={autoFocus}
         onChange={handleChange}
         autoComplete={autoComplete}
+        placeholder={placeholder}
       />
       <span
         className={`label__error ${error || defaultError ? "label__error_active" : ""}`}

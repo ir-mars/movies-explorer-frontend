@@ -39,7 +39,7 @@ function Login () {
             label="E-mail"
             defaultValue="email@yandex.ru"
             autoComplete="user-email"
-            placeholder="Email"
+            placeholder="E-mail"
           />
           <Input
             type="password"
