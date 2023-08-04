@@ -9,12 +9,14 @@ const SavedMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
+    <>
     <main className="saved-movies">
       <SearchForm />
       {/* <Preloader /> */}
-      <MoviesCardList button={""} />
+        <MoviesCardList button={""} />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
 

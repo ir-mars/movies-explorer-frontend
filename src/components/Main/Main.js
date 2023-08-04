@@ -7,13 +7,15 @@ import Footer from '../Footer/Footer';
 
 function Main () {
   return (
-    <main className="main">
-      <Promo />
-      <AboutProject />
-      <Tech />
-      <AboutMe />
+    <>
+      <main className="main">
+        <Promo />
+        <AboutProject />
+        <Tech />
+        <AboutMe />
+      </main>
       <Footer />
-    </main>    
+    </>    
   )  
 }
 

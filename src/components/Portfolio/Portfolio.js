@@ -20,7 +20,7 @@ function Portfolio () {
         <li className="portfolio__list-item">
           <a className="portfolio__link" href="https://github.com/ir-mars/react-mesto-api-full-gha" target="_blank" rel="noreferrer">
             <p className="portfolio__text">Одностраничное приложение</p>
-            <p className="portfolio__symbol">&#x2197;</p>  
+            <p className="portfolio__symbol">&#x2197;</p>
           </a>
         </li>  
       </ul>  

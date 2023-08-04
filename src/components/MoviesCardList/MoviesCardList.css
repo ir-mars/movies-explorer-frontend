@@ -1,56 +1,23 @@
 .movies-list {
-  max-width: 1140px;
-  margin: 70px 70px 0 70px;
-  padding: 0;
-}
-
-@media screen and (max-width: 786px) {
-  .movies-list {
-    margin-right: 30px;
-    margin-left: 30px;
-  }
-}
-
-@media screen and (max-width: 536px) {
-  .movies-list {
-    margin-top: 40px;
-    margin-right: 10px;
-    margin-left: 10px;
-  }
+  max-width: 1280px;
+  margin: 0;
+  padding: 70px 70px 0 70px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .movies-card__list {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4);
+  grid-template-columns: repeat(auto-fit, 270px);
   grid-column-gap: 20px;
   grid-row-gap: 38px;
-  margin: 0;
+  justify-content: space-evenly;
+  margin: 0 auto;
   padding: 0;
-}
-
-@media screen and (max-width: 1156px) {
-  .movies-card__list {
-    grid-template-columns: repeat(3, 1fr);
-  }  
-}
-
-@media screen and (max-width: 786px) {
-  .movies-card__list {
-    grid-template-columns: repeat(auto-fit, 339px);
-    grid-row-gap: 30px;
-    grid-column-gap: 30px;
-    justify-content: space-evenly;
-  }
-}
-
-@media screen and (max-width: 536px) {
-  .movies-card__list {
-    grid-template-columns: repeat(auto-fit, 300px);
-    grid-row-gap: 32px;
-    grid-column-gap: 32px;
-  }
+  width: 100%;
 }
 
 .movies-card__button {
@@ -76,7 +43,33 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+@media screen and (max-width: 786px) {
+  .movies-list {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .movies-card__list {
+    grid-template-columns: repeat(auto-fit, 339px)/*1fr 1fr*/;
+    grid-row-gap: 30px;
+    grid-column-gap: 30px;
+    justify-content: space-evenly;
+  }
+}
+
 @media screen and (max-width: 536px) {
+  .movies-list {
+    padding-top: 40px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .movies-card__list {
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-row-gap: 32px;
+    grid-column-gap: 32px;
+  }
+
   .movies-card__button {
     width: 240px;
   }

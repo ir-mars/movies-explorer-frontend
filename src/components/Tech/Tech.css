@@ -96,7 +96,7 @@
 
 @media screen and (max-width: 836px) and (min-width: 536px) {
   .tech__list {
-    padding: 83px 0 0;
+    padding: 83px 10px 0;
     flex-wrap: wrap;
     gap: 10px;
   }
@@ -113,7 +113,7 @@
   
 .tech__list-item {
   width: 90px;
-  margin: 0 5px 0 5px;
+  margin: 0;
   padding: 21px 0 22px;
   border-radius: 10px;  
   background-color: #E8E8E8;

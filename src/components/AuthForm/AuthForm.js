@@ -24,29 +24,27 @@ function AuthForm ({
 
   return (
     <div className={`authform authform_type_${name}`}>
-      <div className="authform__wrapper">
-        <form 
-          action="#"
-          name={name}
-          id={name}
-          className={`form form_type_${name}`}
-          onSubmit={handleSubmit}
-          onChange={handleChange}
-          autoComplete={autoComplete}
+      <form 
+        action="#"
+        name={name}
+        id={name}
+        className={`form form_type_${name}`}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        autoComplete={autoComplete}
+      >
+        <div>
+          {children}
+        </div>
+        <button
+          type="submit"
+          form={name}
+          className={`form__submit-btn`}
+          disabled={!isFormValid}
         >
-          <div>
-            {children}
-          </div>
-          <button
-            type="submit"
-            form={name}
-            className={`form__submit-btn`}
-            disabled={!isFormValid}
-          >
-            {buttonText}
-          </button>  
-        </form>
-      </div>
+          {buttonText}
+        </button>  
+      </form>
     </div>
   )
 }

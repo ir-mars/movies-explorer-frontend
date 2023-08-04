@@ -9,18 +9,6 @@
   
 }
 
-@media screen and (max-width: 786px) {
-  .footer {
-    padding: 0 30px;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .footer {
-    padding: 0 10px;
-  }
-}
-
 .footer__subtitle {
   display: block;
   width: 100%;
@@ -35,21 +23,6 @@
   border-bottom: 1px solid rgba(160, 160, 160, 1);  
 }
 
-@media screen and (max-width: 786px) {
-  .footer__subtitle {
-    padding-top: 74px;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .footer__subtitle {
-    padding-top: 78px;
-    font-size: 12px;
-    line-height: 15px;    
-    border-bottom: 1px solid var(--bgcolor-medium);
-  }
-}
-
 .footer__container {
   width: 100%;
   display: flex;
@@ -58,28 +31,12 @@
   
 }
 
-@media screen and (max-width: 520px) {
-  .footer__container {
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
 .footer__copyright {
   margin: 0;
   padding: 20px 0;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-}
-
-@media screen and (max-width: 520px) {
-  .footer__copyright {
-    padding: 25px 0 32px;
-    font-size: 12px;
-    line-height: 15px;
-  }
 }
 
 .footer__links {
@@ -92,23 +49,9 @@
   
 }
 
-@media screen and (max-width: 520px) {
-  .footer__links {
-    padding: 0;
-    padding-top: 25px;
-    flex-direction: column;
-  }
-}
-
 .footer__nav-link {
   margin: 0;  
   padding: 0;
-}
-
-@media screen and (max-width: 520px) {
-  .footer__nav-link {
-    margin: 8px 0 0 0;
-  }
 }
 
 .footer__nav-link:first-of-type {
@@ -130,7 +73,50 @@
   opacity: 0.5;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 786px) {
+  .footer {
+    padding: 0 30px;
+  }
+
+  .footer__subtitle {
+    padding-top: 54px;
+  }
+}
+
+@media screen and (max-width: 536px) {
+  .footer {
+    padding: 0 10px;
+  }
+
+  .footer__subtitle {
+    padding-top: 76px;
+    font-size: 12px;
+    line-height: 15px;    
+    border-bottom: 1px solid #E8E8E8;
+  }
+
+  .footer__container {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer__copyright {
+    padding: 24px 0 25px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer__links {
+    padding: 0;
+    padding-top: 25px;
+    flex-direction: column;
+  }
+
+  .footer__nav-link {
+    margin: 8px 0 0 0;
+  }
+
   .footer__link {
     padding-left: 0;
     font-size: 12px;

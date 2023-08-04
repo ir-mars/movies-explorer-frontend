@@ -1,24 +1,11 @@
-.authform__wrapper {
-  width: 396px;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-@media screen and (max-width: 536px) {
-  .authform__wrapper {
-    max-width: 260px;
-    align-items: center;    
-  }  
+.authform {
+  width: 100%;
 }
 
 .form {
   width: 100%;
   height: 380px;
-  padding-top: 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;  
@@ -26,16 +13,13 @@
   
 @media screen and (max-width: 536px) {
   .form {
-    height: 468px;
-    padding-top: 60px;    
+    height: 468px;    
   }
 }
   
 .form__submit-btn {
   width: 100%;
   height: 45px;
-  padding: 0;
-  margin-top: 20px;
   border: none;
   border-radius: 3px;
   background-color: black;
@@ -45,6 +29,8 @@
   font-weight: 500;
   line-height: 17px;
   color: white;
+  margin-top: 20px;
+  padding: 0;
 }
   
 .form__submit-btn_hidden {
