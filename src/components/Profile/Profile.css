@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   padding-top: 74px;
+  padding-bottom: 70px;
 }
 
 .profile__wrapper {
@@ -78,6 +79,7 @@
 @media screen and (max-width: 820px) {
   .profile {
     padding-top: 236px;
+    padding-bottom: 269px;
   }
 
   .profile__title {
@@ -102,6 +104,7 @@
 @media screen and (max-width: 536px) {
   .profile {
     padding-top: 70px;
+    padding-bottom: 40px;
   }
 
   .profile__wrapper {
