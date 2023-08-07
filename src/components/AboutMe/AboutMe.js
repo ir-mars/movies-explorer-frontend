@@ -1,4 +1,5 @@
 import SectionTitle from '../SectionTitle/SectionTitle';
+import { Link } from 'react-router-dom';
 import './AboutMe.css';
 
 import myfoto from '../../images/myfoto.jpg';
@@ -23,7 +24,7 @@ function AboutMe () {
         <h3 className="about-me__name">Ирина</h3>
         <p className="about-me__description">Фронтенд-разработчик, { ageDate() } лет</p>  
         <p className="about-me__text">Я живу в г.Пермь, люблю верстать сайты, учусь на веб-разработчика.</p>  
-        <a className="about-me__link" href="https://github.com/ir-mars" target="_blank" rel="noreferrer">Github</a>
+        <Link className="about-me__link" to="https://github.com/ir-mars" target="_blank" rel="noreferrer">Github</Link>
         <img
           className="about-me__img"  
           src={myfoto}
