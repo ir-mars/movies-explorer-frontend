@@ -9,10 +9,11 @@ function Input ({
   maxLength,
   label,
   placeholder,
-  defaultValue,
-  defaultError = false,
   autoFocus = false,
-  autoComplete
+  autoComplete,
+  errors,
+  onChange,
+  pattern  
 }) {
     
   const [error, setError] = useState(false);
@@ -27,22 +28,23 @@ function Input ({
     <label className="label">
       {label}
       <input
-        className={`input ${autoFocus ? "input_focus" : ""} ${defaultError ? " input_style_error " : ""}`}
+        className={`input ${errors ? " input_style_error " : ""}`}
         type={type}
         name={name}
         required={required}
         minLength={minLength}
         maxLength={maxLength}
         id={name}
-        defaultValue={defaultValue || ""}
         autoFocus={autoFocus}
-        onChange={handleChange}
+        onChange={onChange}
         autoComplete={autoComplete}
         placeholder={placeholder}
+        pattern={pattern}
       />
       <span
-        className={`label__error ${error || defaultError ? "label__error_active" : ""}`}
-          >{error ? error : "Что-то пошло не так..."}
+        className={`label__error ${errors ? "label__error_active" : ""}`}
+      >
+        {errors ? errors : "Что-то пошло не так..."}
       </span>
     </label>
   )

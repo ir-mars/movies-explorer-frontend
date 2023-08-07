@@ -4,20 +4,22 @@ import './Register.css';
 import Logo from '../Logo/Logo';
 import AuthForm from '../AuthForm/AuthForm';
 import Input from '../Input/Input';
+import { useValidation } from '../../hooks/useValidation';
 
-function Register () {
+function Register ({ onRegister }) {
   
-  const [values, setValues] = useState({});
-  
+  const { values, handleChange, isValid, errors } = useValidation();
+
   function onSubmit () {
+    onRegister(values)
   }
-  
+  /*
   function handleChange (e) {
     setValues({
        ...values,
        [e.target.name]: e.target.value
       })
-  }
+  }*/
 
   return (
     <section className="auth">
@@ -27,40 +29,43 @@ function Register () {
         <AuthForm
           name="reg"
           onSubmit={onSubmit}
-          onChange={handleChange}
           buttonText="Зарегистрироваться"
+          isFormValid={isValid}
         >
           <Input
+            onChange={handleChange}
+            errors={errors.name}
             type="text"
             name="name"
             required={true}
             minLength={6}
             maxLength={30}
             label="Имя"
-            defaultValue="Виталий"
             autoComplete="user-name"
             placeholder="Имя"
           />
           <Input
+            onChange={handleChange}
+            errors={errors.email}
             type="email"
             name="email"
             required={true}
             minLength={6}
             maxLength={30}
             label="E-mail"
-            defaultValue="email@yandex.ru"
             autoComplete="user-email"
+            pattern="^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$"
             placeholder="Email"
           />
           <Input
+            onChange={handleChange}
+            errors={errors.password}
             type="password"
             name="password"
             required={true}
             minLength={6}
             maxLength={30}
             label="Пароль"
-            defaultValue="password777"
-            defaultError={true}
             autoComplete="user-password"
             placeholder="Пароль"
           />

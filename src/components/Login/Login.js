@@ -4,20 +4,22 @@ import './Login.css';
 import Logo from '../Logo/Logo';
 import AuthForm from '../AuthForm/AuthForm';
 import Input from '../Input/Input';
+import { useValidation } from '../../hooks/useValidation';
 
-function Login () {
+function Login ({ onLogin }) {
   
-  const [values, setValues] = useState({})
-  
+  const { values, handleChange, isValid, errors } = useValidation();
+
   function onSubmit () {
-  }
-  
+    onLogin(values)
+  }  
+  /*
   function handleChange (e) {
     setValues({      
       ...values,
       [e.target.name]: e.target.value
     })
-  }
+  }*/
 
   return (
     <section className="auth">
@@ -27,21 +29,25 @@ function Login () {
         <AuthForm
           name="login"
           onSubmit={onSubmit}
-          onChange={handleChange}
           buttonText="Войти"
+          isFormValid={isValid}
         >
           <Input
+            onChange={handleChange}
+            errors={errors.email}
             type="email"
             name="email"
             required={true}
             minLength={6}
             maxLength={30}
             label="E-mail"
-            defaultValue="email@yandex.ru"
             autoComplete="user-email"
+            pattern="^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$"
             placeholder="E-mail"
           />
           <Input
+            onChange={handleChange}
+            errors={errors.password}
             type="password"
             name="password"
             required={true}
