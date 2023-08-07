@@ -14,7 +14,6 @@ class Auth {
 
   signUp = async ({ name, email, password }) => {
     const res = await fetch(`${this._url}/signup`, {
-      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -26,7 +25,6 @@ class Auth {
 
   signIn = async ({ email, password }) => {
     const res = await fetch(`${this._url}/signin`, {
-      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -34,6 +32,7 @@ class Auth {
       body: JSON.stringify({ email, password })
     })
     return this._checkAnswer(res);
+
   }
 
   getAuthentication = async (token) => {

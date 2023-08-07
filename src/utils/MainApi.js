@@ -58,7 +58,7 @@ class MainApi {
     return response;
   };
 
-  savedCard (card, token) {
+  saveCard (card, token) {
     return this._request(`${this._baseUrl}/movies`, {
       headers: {
         'Content-Type': 'application/json',
@@ -71,11 +71,10 @@ class MainApi {
         duration: card.duration,
         year: card.year,
         description: card.description,
-        image: 'https://api.nomoreparties.co/' + card.image.url,
+        image: card.image,
         trailerLink: card.trailerLink,
-        thumbnail:
-          'https://api.nomoreparties.co/' + card.image.formats.thumbnail.url,
-        movieId: card.id,
+        thumbnail: card.thumbnail,
+        movieId: card.movieId,
         nameRU: card.nameRU,
         nameEN: card.nameEN,
       }),

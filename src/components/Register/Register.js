@@ -13,18 +13,13 @@ function Register ({ onRegister }) {
   function onSubmit () {
     onRegister(values)
   }
-  /*
-  function handleChange (e) {
-    setValues({
-       ...values,
-       [e.target.name]: e.target.value
-      })
-  }*/
-
+  
   return (
     <section className="auth">
       <div className="auth__wrapper">
-        <Logo />      
+      <NavLink to="/">
+        <Logo />
+      </NavLink>      
         <h2 className="auth__title">Добро пожаловать!</h2>   
         <AuthForm
           name="reg"
@@ -72,7 +67,7 @@ function Register ({ onRegister }) {
         </AuthForm>
         <p className="auth__text">
           Уже зарегистрированы?
-          <Link to="/sign-in" className="auth__link">
+          <Link to="/signin" className="auth__link">
             Войти
           </Link>
         </p>

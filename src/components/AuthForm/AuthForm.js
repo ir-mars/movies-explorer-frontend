@@ -14,11 +14,6 @@ function AuthForm ({
     e.preventDefault();
     onSubmit(e)
   }
-/*
-  function handleChange (e) {
-    setIsFormValid(e.target.validity.valid)
-    onChange(e)
-  }*/
 
   return (
     <div className={`authform authform_type_${name}`}>

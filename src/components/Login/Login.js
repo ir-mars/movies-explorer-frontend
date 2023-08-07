@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Login.css';
 import Logo from '../Logo/Logo';
 import AuthForm from '../AuthForm/AuthForm';
@@ -13,18 +13,13 @@ function Login ({ onLogin }) {
   function onSubmit () {
     onLogin(values)
   }  
-  /*
-  function handleChange (e) {
-    setValues({      
-      ...values,
-      [e.target.name]: e.target.value
-    })
-  }*/
-
+  
   return (
     <section className="auth">
       <div className="auth__wrapper">
+      <NavLink to="/">
         <Logo />
+      </NavLink>        
         <h2 className="auth__title">Рады видеть!</h2>
         <AuthForm
           name="login"
@@ -60,7 +55,7 @@ function Login ({ onLogin }) {
         </AuthForm>
         <p className="auth__text">
           Ещё не зарегистрированы?
-          <Link to="/sign-up" className="auth__link">
+          <Link to="/signup" className="auth__link">
             Регистрация
           </Link>
         </p>

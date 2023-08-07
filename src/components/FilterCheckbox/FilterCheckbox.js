@@ -1,10 +1,22 @@
 import './FilterCheckbox.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function FilterCheckbox () {
-  
+function FilterCheckbox (props) {
+  const { setIsChecked, isSaveValuesInLocalStorage } = props;
   const [isToggleOn, setIsToggleOn] = useState(true);
-
+  const isCheckedInLS = localStorage.getItem("filterCheckbox");
+  function handleChange (event) {
+    const isChecked = event.target.checked;
+    setIsChecked(isChecked);
+    setIsToggleOn(isChecked)
+  }
+  useEffect(() => {
+    if (isSaveValuesInLocalStorage) {
+      setIsChecked(isCheckedInLS === "true");
+      setIsToggleOn(isCheckedInLS === "true");
+    }
+  }, [])
+  
   return (
     <div className="checkbox">
       <div className="checkbox__toggle-container">
@@ -14,7 +26,8 @@ function FilterCheckbox () {
             type="checkbox"
             name="toggle"            
             checked={isToggleOn}
-            onChange={() => setIsToggleOn(!isToggleOn)}
+            defaultChecked={isSaveValuesInLocalStorage ? isCheckedInLS === 'true' : false}
+            onChange={handleChange}
           />
           <span className={`checkbox__toggle_checkbox-on ${isToggleOn && "checkbox__toggle_checkbox-on_checked"}`} />
           Короткометражки
@@ -23,4 +36,5 @@ function FilterCheckbox () {
     </div>
   )
 }
+
 export default FilterCheckbox;

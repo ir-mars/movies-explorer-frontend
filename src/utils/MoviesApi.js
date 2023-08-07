@@ -1,3 +1,5 @@
+export const urlServer = 'https://api.nomoreparties.co/';
+
 class MoviesApi {
     constructor(options) {
       this._options = options;
@@ -18,13 +20,11 @@ class MoviesApi {
         new Error(`Error: ${response.status}: ${response.statusText}`)
       );
     }
-  
-  
   }
   
-  export const moviesApi = new MoviesApi({
-    baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+export const moviesApi = new MoviesApi({
+  baseUrl: urlServer + '/beatfilm-movies',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
