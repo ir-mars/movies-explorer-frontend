@@ -17,7 +17,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import auth from '../../utils/auth';
 import { mainApi } from '../../utils/MainApi';
 import ContentForPopup from '../ContentForPopup/ContentForPopup';
-import { moviesApi, urlServer } from '../../utils/MoviesApi';
+import { moviesApi, mainServerUrl } from '../../utils/MoviesApi';
 import { DURATION_SHORTS } from '../../utils/constants';
 
 function App () {
@@ -33,13 +33,13 @@ function App () {
   const [savedMovies, setSavedMovies] = useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
   const [isCheckedFilterBoxAllMovies, setIsCheckedFilterBoxAllMovies] = useState(
-    localStorage.getItem('filterCheckbox')
-      ? localStorage.getItem('filterCheckbox') === 'true'
+    localStorage.getItem("filterCheckbox")
+      ? localStorage.getItem("filterCheckbox") === "true"
       : false);
   const [searchTextAllMovies, setSearchTextAllMovies] = useState(
-    localStorage.getItem('search')
-      ? localStorage.getItem('search')
-      : '');
+    localStorage.getItem("search")
+      ? localStorage.getItem("search")
+      : "");
   const [isCheckedFilterBoxSavedMovies, setIsCheckedFilterBoxSavedMovies] = useState(null);
   const [searchTextSavedMovies, setSearchTextSavedMovies] = useState(null);
 
@@ -49,7 +49,7 @@ function App () {
       const data = await auth.signUp({ name, email, password });
       if (data) {
         setIsLoggedIn(true);
-        localStorage.setItem('token', data.token)
+        localStorage.setItem("token", data.token)
         navigate("/movies");
         setStatusMessage(`Вы успешно зарегистрированы!`)
         // если регистрация прошла успешно, сразу войдем и получим токен
@@ -69,7 +69,7 @@ function App () {
     try {
       const data = await auth.signIn({ email, password })
       if (data) {
-        localStorage.setItem('token', data.token)
+        localStorage.setItem("token", data.token)
         setIsLoggedIn(true);
         navigate("/movies");
         checkToken(data.token);
@@ -82,7 +82,7 @@ function App () {
   }
 
   //проверка токена
-  const checkToken = (token = localStorage.getItem('token')) => {
+  const checkToken = (token = localStorage.getItem("token")) => {
     setIsLoading(true);
     auth.getAuthentication(token)
       .then((res) => {
@@ -110,11 +110,11 @@ function App () {
     setAllMovies([]);
     setSavedMovies([]);
     setFilteredSavedMovies([]);
-    setSearchTextAllMovies('');
-    setSearchTextSavedMovies('');
+    setSearchTextAllMovies("");
+    setSearchTextSavedMovies("");
     setIsCheckedFilterBoxAllMovies(false);
     setIsCheckedFilterBoxSavedMovies(false);
-    navigate('/');
+    navigate("/");
   }
 
   //изменение профиля
@@ -144,8 +144,8 @@ function App () {
   const filterMoviesOnQueryAndCheckBox = (moviesList, query, filterBox) => {
     const foundArray = moviesList.filter(
       (movie) =>
-        movie.nameRU.toLowerCase().includes(query ? query.toLowerCase() : '') ||
-        movie.nameEN.toLowerCase().includes(query ? query.toLowerCase() : ''),
+        movie.nameRU.toLowerCase().includes(query ? query.toLowerCase() : "") ||
+        movie.nameEN.toLowerCase().includes(query ? query.toLowerCase() : ""),
     );
     return filterBox
       ? foundArray.filter((movie) => movie.duration <= DURATION_SHORTS)
@@ -161,12 +161,12 @@ function App () {
     }
     try {
       setIsLoading(true);
-      const moviesInLS = localStorage.getItem('movies');
+      const moviesInLS = localStorage.getItem("movies");
       //если в локалстораж есть список фильмов, возьмем оттуда, если нет, то скачаем
       const movies = moviesInLS ? JSON.parse(moviesInLS) : await
         moviesApi.getFilms();
       // сохраним фильмы
-      localStorage.setItem('movies', JSON.stringify(movies));
+      localStorage.setItem("movies", JSON.stringify(movies));
 
       const filteredMovies = filterMoviesOnQueryAndCheckBox(movies, searchTextAllMovies, isCheckedFilterBoxAllMovies);
       setAllMovies(filteredMovies);
@@ -180,13 +180,13 @@ function App () {
   // получение сохраненных фильмов
   const getSavedMoviesData = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const savedMoviesInLS = localStorage.getItem('savedMovies');
+      const token = localStorage.getItem("token");
+      const savedMoviesInLS = localStorage.getItem("savedMovies");
       //если в локалстораж есть список фильмов, возьмем оттуда, если нет, то скачаем
       const savedMoviesData = savedMoviesInLS === JSON.stringify(savedMovies) ? JSON.parse(savedMoviesInLS) : await
         mainApi.getSavedCards(token)
       // сохраним фильмы в локалстораж и стейт
-      localStorage.setItem('savedMovies', JSON.stringify(savedMoviesData));
+      localStorage.setItem("savedMovies", JSON.stringify(savedMoviesData));
       setSavedMovies(savedMoviesData);
       const filteredSavedMovies = filterMoviesOnQueryAndCheckBox(savedMoviesData, searchTextSavedMovies, isCheckedFilterBoxSavedMovies);
       setFilteredSavedMovies(filteredSavedMovies);
@@ -201,8 +201,8 @@ function App () {
     // если не авторизован, то и загружать не надо
     if (isLoggedIn) {
       getAllMovies();
-      searchTextAllMovies && localStorage.setItem('search', searchTextAllMovies);
-      localStorage.setItem('filterCheckbox', isCheckedFilterBoxAllMovies);
+      searchTextAllMovies && localStorage.setItem("search", searchTextAllMovies);
+      localStorage.setItem("filterCheckbox", isCheckedFilterBoxAllMovies);
     }
   }, [isCheckedFilterBoxAllMovies, searchTextAllMovies]);
 
@@ -249,11 +249,11 @@ function App () {
       thumbnail
     }
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const response = await mainApi.saveCard(newMovie, token);
       const newArraySavedMoviesList = [...savedMovies, response];
       setSavedMovies(newArraySavedMoviesList)
-      localStorage.setItem('savedMovies', JSON.stringify(newArraySavedMoviesList));
+      localStorage.setItem("savedMovies", JSON.stringify(newArraySavedMoviesList));
     } catch (err) {
       console.log(err);
     } finally {
@@ -265,13 +265,13 @@ function App () {
     // сначала найдем удаляемый фильм по его id
     const findedMovie = savedMovies.find(movie => movie.movieId === movieId);
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const response = await mainApi.deleteCard(findedMovie._id, token);
       // фильтруем , так чтобы показать все фильмы, кроме удаляемого
       const newArraySavedMoviesList = savedMovies.filter((movie) => movie._id !== response._id);
       // обновим массив сохраненных фильмов
       setSavedMovies(newArraySavedMoviesList)
-      localStorage.setItem('savedMovies', JSON.stringify(newArraySavedMoviesList));
+      localStorage.setItem("savedMovies", JSON.stringify(newArraySavedMoviesList));
 
     } catch (err) {
       console.log(err);
