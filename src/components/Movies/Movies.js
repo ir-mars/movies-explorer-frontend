@@ -4,49 +4,49 @@ import './Movies.css';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import Header from '../Header/Header';
-import { calcVisibleAndLoadMoreCards } from '../../utils/utils';
+import { calcQtyCards } from '../../utils/utils';
 
 function Movies (props) {
-  const { moviesList,
-    savedMoviesList,
+  const { allMovies,
+    savedMovies,
     isLoading,
     setIsChecked,
     setSearch,
     onLike,
     onDislike } = props;
   const [movies, setMovies] = useState([]);
-  const unwatchedFilms = moviesList.slice(movies.length);
-  const [loadMoreCount, setLoadMoreCount] = useState(null); //  количество выводимых доп.карточек
-  const handledResizeData = calcVisibleAndLoadMoreCards();
-  const [countCardsPerLoad, setCountCardsPerLoad] = useState(handledResizeData.countCardsPerLoad); //колво карточек при первой загрузке
+  const invisibleFilms = allMovies.slice(movies.length);
+  const [qtyCardsButtonMore, setLoadMoreCount] = useState(null);
+  const [qtyInitialCards, setCountCardsPerLoad] = useState(calcQtyCards().qtyInitialCards);
 
-  // при загрузке показываем не все фильмы
   useEffect(() => {
-    setMovies(moviesList.slice(0, countCardsPerLoad))
-  }, [moviesList])
+    setMovies(allMovies.slice(0, qtyInitialCards))
+  }, [allMovies])
 
-  // при загрузке определяем сколько отображать карточек
   useEffect(() => {
-    const { countCardsPerLoad, loadMoreCount } = calcVisibleAndLoadMoreCards();
-    setCountCardsPerLoad(countCardsPerLoad);
-    setLoadMoreCount(loadMoreCount);
-    window.addEventListener("resize", handleResizeWindow);
+    document.title = "Все фильмы";
+  }, [])
 
-    return () => window.removeEventListener("resize", handleResizeWindow);
+  useEffect(() => {
+    const { qtyInitialCards, qtyCardsButtonMore } = calcQtyCards();
+    setCountCardsPerLoad(qtyInitialCards);
+    setLoadMoreCount(qtyCardsButtonMore);
+    window.addEventListener('resize', handleChangeSizeWindow);
+
+    return () => window.removeEventListener('resize', handleChangeSizeWindow);
   }, []);
 
-  // обработка нажатия на кнопку еще
-  function remainingFilmsToView () {
-    setMovies([...movies, ...unwatchedFilms.slice(0, loadMoreCount)])
+  // обработка нажатия на кнопку 'еще'
+  function handleClickButtonMore () {
+    setMovies([...movies, ...invisibleFilms.slice(0, qtyCardsButtonMore)])
   }
 
-  // функция следит за изменением ширины страницы с задержкой
-  function handleResizeWindow () {
+  function handleChangeSizeWindow () {
     setTimeout(() => {
-      const { countCardsPerLoad, loadMoreCount } = calcVisibleAndLoadMoreCards();
-      setCountCardsPerLoad(countCardsPerLoad);
-      setLoadMoreCount(loadMoreCount);
-    }, 100);
+      const { qtyInitialCards, qtyCardsButtonMore } = calcQtyCards();
+      setCountCardsPerLoad(qtyInitialCards);
+      setLoadMoreCount(qtyCardsButtonMore);
+    }, 500);
   }
 
   return (
@@ -57,14 +57,14 @@ function Movies (props) {
           isLoading={isLoading}
           setIsChecked={setIsChecked}
           setSearch={setSearch}
-          isSaveValuesInLocalStorage={true}
+          localStorageEnabled={true}
         />
         <MoviesCardList
           movies={movies}
           isLoading={isLoading}
-          unwatchedFilms={unwatchedFilms}
-          remainingFilmsToView={remainingFilmsToView}
-          savedMoviesList={savedMoviesList}
+          invisibleFilms={invisibleFilms}
+          handleClickButtonMore={handleClickButtonMore}
+          savedMovies={savedMovies}
           onLike={onLike}
           onDislike={onDislike}
         />

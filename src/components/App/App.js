@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
 
-import Header from '../Header/Header';
+/*import Header from '../Header/Header';*/
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -16,7 +16,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import auth from '../../utils/auth';
 import { mainApi } from '../../utils/MainApi';
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import ContentForPopup from '../ContentForPopup/ContentForPopup';
 import { moviesApi, urlServer } from '../../utils/MoviesApi';
 import { DURATION_SHORTS } from '../../utils/constants';
 
@@ -25,62 +25,65 @@ function App () {
   const navigate = useNavigate();
   const currentPath = location.pathname;
   const [isLoading, setIsLoading] = useState(true);
-  const [isMenuOpened, setIsMenuOpened] = useState(false);
-  const [isNotifyPopupOpen, setIsNotifyPopupOpen] = useState(false);
-  const [statusMessage, setStatusMessage] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [statusMessageInPopup, setStatusMessage] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ data: {} });
+  const [allMovies, setAllMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
+  const [isCheckedFilterBoxAllMovies, setIsCheckedFilterBoxAllMovies] = useState(
+    localStorage.getItem('filterCheckbox')
+      ? localStorage.getItem('filterCheckbox') === 'true'
+      : false);
+  const [searchTextAllMovies, setSearchTextAllMovies] = useState(
+    localStorage.getItem('search')
+      ? localStorage.getItem('search')
+      : '');
+  const [isCheckedFilterBoxSavedMovies, setIsCheckedFilterBoxSavedMovies] = useState(null);
+  const [searchTextSavedMovies, setSearchTextSavedMovies] = useState(null);
 
-  // для фильмов
-  const [moviesList, setMoviesList] = useState([]); // список всех фильмов
-  const [savedMoviesList, setSavedMoviesList] = useState([]); // массив сохраненных фильмов
-  const [filteredSavedMoviesList, setFilteredSavedMoviesList] = useState([]); // массив сохранненых отфильтрованных фильмов
-  const [isCheckedFilterBoxMovies, setIsCheckedFilterBoxMovies] = useState(localStorage.getItem("filterCheckbox") ? localStorage.getItem("filterCheckbox") === "true" : false); // статус кнопки "короткометражки" для всех фильмов
-  const [searchTextMovies, setSearchTextMovies] = useState(localStorage.getItem("search") ? localStorage.getItem("search") : ""); // текст запроса формы поиска среди всех фильмов
-  const [isCheckedFilterBoxSavedMovies, setIsCheckedFilterBoxSavedMovies] = useState(null); // статус кнопки "короткометражки" для сохраненных фильмов
-  const [searchTextSavedMovies, setSearchTextSavedMovies] = useState(null); // текст запроса формы поиска среди сохраненных фильмов
-
-  //управление формой регистрации
+  //колбэк регистрации
   const handleRegister = async ({ name, email, password }) => {
     try {
       const data = await auth.signUp({ name, email, password });
       if (data) {
-        localStorage.setItem("token", data.token)
         setIsLoggedIn(true);
+        localStorage.setItem('token', data.token)
         navigate("/movies");
         setStatusMessage(`Вы успешно зарегистрированы!`)
+        // если регистрация прошла успешно, сразу войдем и получим токен
         handleLogin({ email, password })
       }
     } catch (err) {
       console.log(err);
-      setIsNotifyPopupOpen(true)
+      setIsPopupOpen(true)
       setStatusMessage(`Произошла ошибка регистрации:${err}`)
     } finally {
-      setIsNotifyPopupOpen(true)
+      setIsPopupOpen(true)
     }
   }
 
-  //управление формой авторизации
+  //колбэк входа
   const handleLogin = async ({ email, password }) => {
     try {
       const data = await auth.signIn({ email, password })
       if (data) {
-        localStorage.setItem("token", data.token)
+        localStorage.setItem('token', data.token)
         setIsLoggedIn(true);
         navigate("/movies");
-        checkToken()
+        checkToken(data.token);
       }
     } catch (err) {
       console.log(err);
-      setIsNotifyPopupOpen(true)
+      setIsPopupOpen(true)
       setStatusMessage(`Произошла ошибка авторизации:${err}`)
     }
   }
 
-  //проверка
-  const checkToken = () => {
+  //проверка токена
+  const checkToken = (token = localStorage.getItem('token')) => {
     setIsLoading(true);
-    const token = localStorage.getItem("token");
     auth.getAuthentication(token)
       .then((res) => {
         if (res) {
@@ -92,24 +95,32 @@ function App () {
       .finally(() => setIsLoading(false))
   }
 
+  // при первом запуске проверим пользователя
   useEffect(() => {
     checkToken();
   }, []);
 
-  //выход пользователя со страницы getUserInfo
+  //выход
   const handleSignOut = () => {
     localStorage.clear();
     setIsLoggedIn(false);
-    setStatusMessage(`Вы успешно вышли!`);
+    setStatusMessage(`Вы вышли!`);
     setCurrentUser({ data: {} });
-    setIsNotifyPopupOpen(true);
-    navigate("/");
+    setIsPopupOpen(true);
+    setAllMovies([]);
+    setSavedMovies([]);
+    setFilteredSavedMovies([]);
+    setSearchTextAllMovies('');
+    setSearchTextSavedMovies('');
+    setIsCheckedFilterBoxAllMovies(false);
+    setIsCheckedFilterBoxSavedMovies(false);
+    navigate('/');
   }
 
-  //редактирование информации о пользователе
-  const handleUpdateUserData = async (newUser) => {
+  //изменение профиля
+  const handleUpdateUser = async (newUser) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const updatedUserData = await mainApi.editUser(newUser, token);
       setCurrentUser(updatedUserData);
       setStatusMessage(`Новое имя "${newUser.name}" и электронная почта "${newUser.email}" успешно сохранены`)
@@ -117,44 +128,48 @@ function App () {
       console.log(err)
       setStatusMessage(`Ошибка обновления данных.`)
     } finally {
-      setIsNotifyPopupOpen(true)
+      setIsPopupOpen(true)
     }
   }
 
+  // если обновить страницу, чтобы был переход там же, где был(а) раньше
   useEffect(() => {
     if (isLoggedIn) {
-      console.log(currentPath);
       navigate(currentPath, { replace: true });
     }
   }, [isLoggedIn])
 
-  // фильтрация массива фильмов
-  const filterMoviesList = (moviesData, userRequest, isCheckedFilterBox) => {
-    const foundMovies = moviesData.filter(
+  
+  // фильтрация по ключу и чекбоксу
+  const filterMoviesOnQueryAndCheckBox = (moviesList, query, filterBox) => {
+    const foundArray = moviesList.filter(
       (movie) =>
-        movie.nameRU.toLowerCase().includes(userRequest ? userRequest.toLowerCase() : "") ||
-        movie.nameEN.toLowerCase().includes(userRequest ? userRequest.toLowerCase() : ""),
+        movie.nameRU.toLowerCase().includes(query ? query.toLowerCase() : '') ||
+        movie.nameEN.toLowerCase().includes(query ? query.toLowerCase() : ''),
     );
-    return isCheckedFilterBox
-      ? foundMovies.filter((movie) => movie.duration <= DURATION_SHORTS)
-      : foundMovies;
+    return filterBox
+      ? foundArray.filter((movie) => movie.duration <= DURATION_SHORTS)
+      : foundArray;
   }
 
-  // загрузка основного массива фильмов (из хранилища если есть)
-  const getMoviesData = async () => {
-    if (!searchTextMovies) {
-      setMoviesList([]);
+  // загрузка основного массива фильмов (проверяем локалстораж)
+  const getAllMovies = async () => {
+    // если запроса нет, то не надо ничего загружать
+    if (!searchTextAllMovies) {
+      setAllMovies([]);
       return;
     }
     try {
       setIsLoading(true);
-      const moviesInLS = localStorage.getItem("movies");
-      const moviesData = moviesInLS ? JSON.parse(moviesInLS) : await
+      const moviesInLS = localStorage.getItem('movies');
+      //если в локалстораж есть список фильмов, возьмем оттуда, если нет, то скачаем
+      const movies = moviesInLS ? JSON.parse(moviesInLS) : await
         moviesApi.getFilms();
-      localStorage.setItem("movies", JSON.stringify(moviesData));
+      // сохраним фильмы
+      localStorage.setItem('movies', JSON.stringify(movies));
 
-      const newMoviesList = filterMoviesList(moviesData, searchTextMovies, isCheckedFilterBoxMovies);
-      setMoviesList(newMoviesList);
+      const filteredMovies = filterMoviesOnQueryAndCheckBox(movies, searchTextAllMovies, isCheckedFilterBoxAllMovies);
+      setAllMovies(filteredMovies);
     } catch (err) {
       console.log(err);
     } finally {
@@ -162,32 +177,34 @@ function App () {
     }
   };
 
-  // загрузка списка сохраненных фильмов
+  // получение сохраненных фильмов
   const getSavedMoviesData = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const savedMoviesInLS = localStorage.getItem("savedMovies");
-      const savedMoviesData = savedMoviesInLS === JSON.stringify(savedMoviesList) ? JSON.parse(savedMoviesInLS) : await
+      const token = localStorage.getItem('token');
+      const savedMoviesInLS = localStorage.getItem('savedMovies');
+      //если в локалстораж есть список фильмов, возьмем оттуда, если нет, то скачаем
+      const savedMoviesData = savedMoviesInLS === JSON.stringify(savedMovies) ? JSON.parse(savedMoviesInLS) : await
         mainApi.getSavedCards(token)
-      localStorage.setItem("savedMovies", JSON.stringify(savedMoviesData));
-      setSavedMoviesList(savedMoviesData);
-      const filteredSavedMoviesList = filterMoviesList(savedMoviesData, searchTextSavedMovies, isCheckedFilterBoxSavedMovies);
-      setFilteredSavedMoviesList(filteredSavedMoviesList);
+      // сохраним фильмы в локалстораж и стейт
+      localStorage.setItem('savedMovies', JSON.stringify(savedMoviesData));
+      setSavedMovies(savedMoviesData);
+      const filteredSavedMovies = filterMoviesOnQueryAndCheckBox(savedMoviesData, searchTextSavedMovies, isCheckedFilterBoxSavedMovies);
+      setFilteredSavedMovies(filteredSavedMovies);
     } catch (err) {
       console.log(err);
     } finally {
     }
   };
 
-  // при изменении запроса запускаем функцию по обновлению списка фильмов
+  // следим за изменениями запроса и чекбокса
   useEffect(() => {
+    // если не авторизован, то и загружать не надо
     if (isLoggedIn) {
-      getMoviesData();
-      searchTextMovies && localStorage.setItem("search", searchTextMovies);
-      localStorage.setItem("filterCheckbox", isCheckedFilterBoxMovies);
-      console.log(isCheckedFilterBoxMovies, searchTextMovies);
+      getAllMovies();
+      searchTextAllMovies && localStorage.setItem('search', searchTextAllMovies);
+      localStorage.setItem('filterCheckbox', isCheckedFilterBoxAllMovies);
     }
-  }, [isCheckedFilterBoxMovies, searchTextMovies]);
+  }, [isCheckedFilterBoxAllMovies, searchTextAllMovies]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -195,10 +212,10 @@ function App () {
     }
   }, [isCheckedFilterBoxSavedMovies, searchTextSavedMovies]);
 
-  // при первом запуске запускаем загрузку
+  // при первом запуске запускаем загрузку всех фильмов и сохраненных фильмов
   useEffect(() => {
     if (isLoggedIn) {
-      getMoviesData();
+      getAllMovies();
       getSavedMoviesData();
     }
   }, [isLoggedIn]);
@@ -213,12 +230,11 @@ function App () {
       nameEN,
       nameRU,
       trailerLink,
+      thumbnail,
       year,
-      thumbnail
     } = movie;
     const movieId = movie.id;
-    const image = urlServer + movie.image.url;
-    console.log(movieId);
+    const image = mainServerUrl + movie.image.url;
     const newMovie = {
       country,
       description,
@@ -232,13 +248,12 @@ function App () {
       image,
       thumbnail
     }
-    console.log(newMovie);
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const response = await mainApi.saveCard(newMovie, token);
-      const newArraySavedMoviesList = [...savedMoviesList, response];
-      setSavedMoviesList(newArraySavedMoviesList)
-      localStorage.setItem("savedMovies", JSON.stringify(newArraySavedMoviesList));
+      const newArraySavedMoviesList = [...savedMovies, response];
+      setSavedMovies(newArraySavedMoviesList)
+      localStorage.setItem('savedMovies', JSON.stringify(newArraySavedMoviesList));
     } catch (err) {
       console.log(err);
     } finally {
@@ -247,31 +262,36 @@ function App () {
 
   // удаляем лайк
   async function handleDislike (movieId) {
-    const findedMovie = savedMoviesList.find(movie => movie.movieId === movieId);
+    // сначала найдем удаляемый фильм по его id
+    const findedMovie = savedMovies.find(movie => movie.movieId === movieId);
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const response = await mainApi.deleteCard(findedMovie._id, token);
-      const newArraySavedMoviesList = savedMoviesList.filter((movie) => movie._id !== response._id);
-      setSavedMoviesList(newArraySavedMoviesList)
-      localStorage.setItem("savedMovies", JSON.stringify(newArraySavedMoviesList));
+      // фильтруем , так чтобы показать все фильмы, кроме удаляемого
+      const newArraySavedMoviesList = savedMovies.filter((movie) => movie._id !== response._id);
+      // обновим массив сохраненных фильмов
+      setSavedMovies(newArraySavedMoviesList)
+      localStorage.setItem('savedMovies', JSON.stringify(newArraySavedMoviesList));
 
     } catch (err) {
       console.log(err);
     } finally {
     }
   }
-  useEffect(() => {
-    const filteredSavedMoviesList = filterMoviesList(savedMoviesList, searchTextSavedMovies, isCheckedFilterBoxSavedMovies);
-    setFilteredSavedMoviesList(filteredSavedMoviesList);
-  }, [savedMoviesList]);
 
+  // если изменился список сохраняемых фильмов и при этом был включен фильтр, обновим его
+  useEffect(() => {
+    const filteredSavedMovies = filterMoviesOnQueryAndCheckBox(savedMovies, searchTextSavedMovies, isCheckedFilterBoxSavedMovies);
+    setFilteredSavedMovies(filteredSavedMovies);
+  }, [savedMovies]);
+
+  // если идет загрузка покажем индикатор
   if (isLoading) {
     return <Preloader />
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-
       <div className="page">
         <Routes>
           <Route path="/" element={<Main />} />
@@ -279,10 +299,10 @@ function App () {
             <ProtectedRoute
               element={Movies}
               loggedIn={isLoggedIn}
-              setIsChecked={setIsCheckedFilterBoxMovies}
-              setSearch={setSearchTextMovies}
-              moviesList={moviesList}
-              savedMoviesList={savedMoviesList}
+              setIsChecked={setIsCheckedFilterBoxAllMovies}
+              setSearch={setSearchTextAllMovies}
+              allMovies={allMovies}
+              savedMovies={savedMovies}
               isLoading={isLoading}
               onLike={handleLike}
               onDislike={handleDislike}
@@ -293,17 +313,17 @@ function App () {
             <ProtectedRoute
               element={SavedMovies}
               loggedIn={isLoggedIn}
-              moviesList={filteredSavedMoviesList}
+              allMovies={filteredSavedMovies}
               setSearch={setSearchTextSavedMovies}
               setIsChecked={setIsCheckedFilterBoxSavedMovies}
-              savedMoviesList={savedMoviesList}
+              savedMovies={savedMovies}
               isLoading={isLoading}
               onDislike={handleDislike}
             />
           } />
 
           <Route path="/profile" element={
-            <ProtectedRoute element={Profile} loggedIn={isLoggedIn} onSignOut={handleSignOut} onUpdateUserData={handleUpdateUserData} />
+            <ProtectedRoute element={Profile} loggedIn={isLoggedIn} onSignOut={handleSignOut} onUpdateUserData={handleUpdateUser} />
           } />
 
           <Route path="/signup" element={isLoggedIn
@@ -324,11 +344,11 @@ function App () {
           <Route path="*" element={<NotFound />} />
 
         </Routes>
-        <InfoTooltip
+        <ContentForPopup
           name="notify"
-          isOpen={isNotifyPopupOpen}
-          setPopupOpened={setIsNotifyPopupOpen}
-          statusMessage={statusMessage}
+          isOpen={isPopupOpen}
+          setPopupOpened={setIsPopupOpen}
+          statusMessageInPopup={statusMessageInPopup}
         />
       </div>
     </CurrentUserContext.Provider>    

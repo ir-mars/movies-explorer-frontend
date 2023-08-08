@@ -6,7 +6,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext, useState } from 'react';
 
 function Header () {
-  const location = useLocation();
   const currentUser = useContext(CurrentUserContext);
   const { name, email } = currentUser;
   const [menuOpened, setIsMenuOpened] = useState(false);
@@ -50,7 +49,7 @@ function Header () {
               <NavLink to="/">
                 <Logo />
               </NavLink>
-              <button className={`header__burger-btn ${menuOpened ? "header__burger-btn_close" : ""}`} onClick={() => handleMenuOpened(!menuOpened)}>
+              <button className={`header__burger-btn ${menuOpened ? "header__burger-btn_close" : ''}`} onClick={() => handleMenuOpened(!menuOpened)}>
               </button>
             </nav>
             <Navigation menuOpened={menuOpened} onClose={() => handleMenuOpened(false)} />

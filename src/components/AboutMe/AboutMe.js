@@ -1,7 +1,6 @@
 import SectionTitle from '../SectionTitle/SectionTitle';
 import { Link } from 'react-router-dom';
 import './AboutMe.css';
-
 import myfoto from '../../images/myfoto.jpg';
 import Portfolio from '../Portfolio/Portfolio';
 

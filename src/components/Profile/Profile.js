@@ -26,6 +26,10 @@ function Profile ({ onUpdateUserData, onSignOut }) {
   }
 
   useEffect(() => {
+    document.title = "Редактирование профиля";
+  }, [])
+
+  useEffect(() => {
     values.name !== name || values.email !== email
       ? setIsUpdatedUserData(true)
       : setIsUpdatedUserData(false)
@@ -36,7 +40,7 @@ function Profile ({ onUpdateUserData, onSignOut }) {
       <Header />
       <section className="profile">
         <div className="profile__wrapper">  
-  <h1 className="profile__title">Привет, {name}</h1>
+          <h1 className="profile__title">Привет, {name}</h1>
           <form
             name="profile__form"
             className="profile__form"
@@ -46,7 +50,7 @@ function Profile ({ onUpdateUserData, onSignOut }) {
               <input
                 className="profile__form-input"
                 type="text"
-                name="profile-name"
+                name="name"
                 required
                 minLength={2}
                 maxLength={30}
@@ -85,7 +89,7 @@ function Profile ({ onUpdateUserData, onSignOut }) {
           <div className="profile__links">
             <button
               type="button"
-              className={`profile__link ${isValid && isUpdatedUserData && 'profile__link_type_success'}`}
+              className={`profile__link ${isValid && isUpdatedUserData && "profile__link_type_success"}`}
               onClick={handleClickBtn}
               disabled={isEdit ? !isValid || !isUpdatedUserData : false}
             >

@@ -1,13 +1,14 @@
 import {
-  COUNT_CARDS_PER_LOAD_FOR_PC, // количество карточек для первой загрузки для ПК
-  COUNT_CARDS_PER_LOAD_FOR_PHONE, // количество карточек для первой загрузки для мобил
-  COUNT_CARDS_PER_LOAD_FOR_TABLET, // количество карточек для первой загрузки для планшетов
-  COUNT_LOADS_CARD_MORE_FOR_PC_TABLET, // количество карточек при нажатии кнопки ЕЩЕ - ПК и планшеты
-  COUNT_LOADS_CARD_MORE_FOR_PHONE, // количество карточек при нажатии кнопки ЕЩЕ - мобилы
-  WIDTH_SCREEN_FOR_PC, // ширина для ПК
-  WIDTH_SCREEN_FOR_PHONE, // ширина мобил
-  WIDTH_SCREEN_FOR_TABLET // ширина для планшетов
-} from "./constants";
+  QTY_INITIAL_CARDS_FOR_PC, //  ПК
+  QTY_INITIAL_CARDS_FOR_PHONE, // мобилы
+  QTY_INITIAL_CARDS_FOR_TABLET, // для планшетов
+  QTY_CARDS_BUTTON_MORE_FOR_PC, // ЕЩЕ - ПК
+  QTY_CARDS_BUTTON_MORE_FOR_TABLET, // ЕЩЕ - планшеты
+  QTY_CARDS_BUTTON_MORE_FOR_PHONE, // ЕЩЕ - мобилы
+  WIDTH_FOR_PC, // эндпоинт ПК
+  WIDTH_FOR_PHONE, // эндпоинт мобил
+  WIDTH_FOR_TABLET // эндпоинт для планшетов
+} from './constants';
 
 export function timeConvertor(duration) {
   const minutes = duration % 60;
@@ -19,20 +20,22 @@ export function timeConvertor(duration) {
   }
 };
 
-//расчет количества отображаемых карточек
-export function calcVisibleAndLoadMoreCards () {
+//сколько карточек показывать
+export function calcQtyCards () {
   const widthWindow = window.innerWidth;
-  let countCardsPerLoad, loadMoreCount;
+  let qtyInitialCards, qtyCardsButtonMore;
 
-  if (widthWindow >= WIDTH_SCREEN_FOR_PC) {
-    loadMoreCount = COUNT_LOADS_CARD_MORE_FOR_PC_TABLET;
-    countCardsPerLoad = COUNT_CARDS_PER_LOAD_FOR_PC;
-  } else if (widthWindow >= WIDTH_SCREEN_FOR_TABLET) {
-    loadMoreCount = COUNT_LOADS_CARD_MORE_FOR_PC_TABLET;
-    countCardsPerLoad = COUNT_CARDS_PER_LOAD_FOR_TABLET;
-  } else if (widthWindow >= WIDTH_SCREEN_FOR_PHONE) {
-    loadMoreCount = COUNT_LOADS_CARD_MORE_FOR_PHONE;
-    countCardsPerLoad = COUNT_CARDS_PER_LOAD_FOR_PHONE;
+  if (widthWindow >= WIDTH_FOR_PC) {
+    qtyCardsButtonMore = QTY_CARDS_BUTTON_MORE_FOR_PC;
+    qtyInitialCards = QTY_INITIAL_CARDS_FOR_PC;
+
+  } else if (widthWindow >= WIDTH_FOR_TABLET) {
+    qtyCardsButtonMore = QTY_CARDS_BUTTON_MORE_FOR_TABLET;
+    qtyInitialCards = QTY_INITIAL_CARDS_FOR_TABLET;
+
+  } else if (widthWindow >= WIDTH_FOR_PHONE) {
+    qtyCardsButtonMore = QTY_CARDS_BUTTON_MORE_FOR_PHONE;
+    qtyInitialCards = QTY_INITIAL_CARDS_FOR_PHONE;
   }
-  return { countCardsPerLoad, loadMoreCount };
+  return { qtyInitialCards, qtyCardsButtonMore };
 }  

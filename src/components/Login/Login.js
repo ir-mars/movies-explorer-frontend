@@ -12,7 +12,11 @@ function Login ({ onLogin }) {
 
   function onSubmit () {
     onLogin(values)
-  }  
+  }
+  
+  useEffect(() => {
+    document.title = "Вход";
+  }, [])
   
   return (
     <section className="auth">

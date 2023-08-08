@@ -7,14 +7,14 @@ function SearchForm (props) {
     setIsChecked,
     setSearch,
     isLoading,
-    isSaveValuesInLocalStorage
+    localStorageEnabled
   } = props;
   const [isValid, setIsValid] = useState(false);
   
   function handleChange (event) {
     setIsValid(event.target.validity.valid);
   }
-
+  
   function handleSubmit (event) {
     event.preventDefault();
     const searchText = event.target.elements['search'].value;
@@ -34,7 +34,7 @@ function SearchForm (props) {
           name="search"
           placeholder="Фильм"
           required={true}
-          defaultValue={isSaveValuesInLocalStorage ? localStorage.getItem("search") || "" : ""}          
+          defaultValue={localStorageEnabled ? localStorage.getItem("search") || "" : ""}          
         />
         <button
           className="search-form__submit"
@@ -43,7 +43,7 @@ function SearchForm (props) {
         ></button>
         <FilterCheckbox
           setIsChecked={setIsChecked}
-          isSaveValuesInLocalStorage={isSaveValuesInLocalStorage}
+          localStorageEnabled={localStorageEnabled}
         />        
       </form>
     </section>

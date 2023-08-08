@@ -1,4 +1,4 @@
-export const urlServer = 'https://api.nomoreparties.co/';
+export const mainServerUrl = 'https://api.nomoreparties.co/';
 
 class MoviesApi {
     constructor(options) {
@@ -23,7 +23,7 @@ class MoviesApi {
   }
   
 export const moviesApi = new MoviesApi({
-  baseUrl: urlServer + '/beatfilm-movies',
+  baseUrl: mainServerUrl + '/beatfilm-movies',
   headers: {
     'Content-Type': 'application/json',
   },

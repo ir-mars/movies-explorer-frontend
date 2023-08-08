@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from 'react-router-dom';
 import './Register.css';
 import Logo from '../Logo/Logo';
 import AuthForm from '../AuthForm/AuthForm';
@@ -13,6 +13,10 @@ function Register ({ onRegister }) {
   function onSubmit () {
     onRegister(values)
   }
+
+  useEffect(() => {
+    document.title = "Регистрация";
+  }, [])
   
   return (
     <section className="auth">
