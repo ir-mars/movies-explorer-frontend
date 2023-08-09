@@ -9,11 +9,11 @@ function Header () {
   const currentUser = useContext(CurrentUserContext);
   const { name, email } = currentUser;
   const [menuOpened, setIsMenuOpened] = useState(false);
-  
+
   function handleMenuOpened () {
     setIsMenuOpened(!menuOpened)
   }
-  
+
   return (
     <header className="header">
       {!name || !email
@@ -28,9 +28,7 @@ function Header () {
         : (
           <div className="header__wrapper">
             <nav className="header__nav-links header__hidden_tab-mobile">
-              <NavLink to="/">
-                <Logo />
-              </NavLink>
+              <Logo />
             </nav>
             <nav className="header__nav-links header__hidden_tab-mobile">
               <Link to="/movies" className="header__link">
@@ -46,16 +44,14 @@ function Header () {
             </nav>
 
             <nav className="header__nav-links header__hidden_pc">
-              <NavLink to="/">
-                <Logo />
-              </NavLink>
+              <Logo />
               <button className={`header__burger-btn ${menuOpened ? "header__burger-btn_close" : ''}`} onClick={() => handleMenuOpened(!menuOpened)}>
               </button>
             </nav>
             <Navigation menuOpened={menuOpened} onClose={() => handleMenuOpened(false)} />
           </div>
         )
-      }  
+      }
     </header>
   )
 }

@@ -23,3 +23,4 @@
 ## ссылка на Пулл-реквест
 
 https://github.com/ir-mars/movies-explorer-frontend/pull/2
+

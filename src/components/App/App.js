@@ -120,7 +120,7 @@ function App () {
   //изменение профиля
   const handleUpdateUser = async (newUser) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const updatedUserData = await mainApi.editUser(newUser, token);
       setCurrentUser(updatedUserData);
       setStatusMessage(`Новое имя "${newUser.name}" и электронная почта "${newUser.email}" успешно сохранены`)
