@@ -7,10 +7,12 @@ import {
   QTY_CARDS_BUTTON_MORE_FOR_PHONE, // ЕЩЕ - мобилы
   WIDTH_FOR_PC, // эндпоинт ПК
   WIDTH_FOR_PHONE, // эндпоинт мобил
-  WIDTH_FOR_TABLET // эндпоинт для планшетов
+  WIDTH_FOR_TABLET, // эндпоинт для планшетов
+  WIDTH_FOR_SMALL_PC,
+  QTY_CARDS_BUTTON_MORE_FOR_SMALL_PC
 } from './constants';
 
-export function timeConvertor(duration) {
+export function timeConvertor (duration) {
   const minutes = duration % 60;
   const hours = (duration - minutes) / 60;
   if (hours < 1) {
@@ -29,6 +31,10 @@ export function calcQtyCards () {
     qtyCardsButtonMore = QTY_CARDS_BUTTON_MORE_FOR_PC;
     qtyInitialCards = QTY_INITIAL_CARDS_FOR_PC;
 
+  } else if (widthWindow >= WIDTH_FOR_SMALL_PC) {
+    qtyCardsButtonMore = QTY_CARDS_BUTTON_MORE_FOR_SMALL_PC;
+    qtyInitialCards = QTY_INITIAL_CARDS_FOR_PC;
+
   } else if (widthWindow >= WIDTH_FOR_TABLET) {
     qtyCardsButtonMore = QTY_CARDS_BUTTON_MORE_FOR_TABLET;
     qtyInitialCards = QTY_INITIAL_CARDS_FOR_TABLET;
@@ -38,4 +44,4 @@ export function calcQtyCards () {
     qtyInitialCards = QTY_INITIAL_CARDS_FOR_PHONE;
   }
   return { qtyInitialCards, qtyCardsButtonMore };
-}  
+}

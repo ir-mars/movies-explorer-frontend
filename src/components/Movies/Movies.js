@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import Header from '../Header/Header';
 import { calcQtyCards } from '../../utils/utils';
+import Preloader from '../Preloader/Preloader';
 
 function Movies (props) {
   const { allMovies,
@@ -59,19 +60,21 @@ function Movies (props) {
           setSearch={setSearch}
           localStorageEnabled={true}
         />
-        <MoviesCardList
-          movies={movies}
-          isLoading={isLoading}
-          invisibleFilms={invisibleFilms}
-          handleClickButtonMore={handleClickButtonMore}
-          savedMovies={savedMovies}
-          onLike={onLike}
-          onDislike={onDislike}
-        />
+        {isLoading
+          ? (<Preloader />)
+          : (<MoviesCardList
+            movies={movies}
+            isLoading={isLoading}
+            invisibleFilms={invisibleFilms}
+            handleClickButtonMore={handleClickButtonMore}
+            savedMovies={savedMovies}
+            onLike={onLike}
+            onDislike={onDislike}
+          />)}
       </main>
       <Footer />
-    </>  
-  )  
+    </>
+  )
 }
 
 export default Movies;

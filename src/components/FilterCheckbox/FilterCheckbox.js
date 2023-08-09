@@ -4,14 +4,17 @@ import { useEffect, useState } from 'react';
 function FilterCheckbox (props) {
   const { setIsChecked, localStorageEnabled } = props;
   const isCheckedLocalStorage = localStorage.getItem("filterCheckbox");
-  const [isToggleOn, setIsToggleOn] = useState(!localStorageEnabled ? isCheckedLocalStorage === "true" : false);
-  
+  const [isToggleOn, setIsToggleOn] = useState(
+    localStorageEnabled
+      ? isCheckedLocalStorage === "true"
+      : false);
+
   function handleChange (e) {
     const isChecked = e.target.checked;
     setIsChecked(isChecked);
     setIsToggleOn(isChecked)
   }
-  
+
   return (
     <div className="checkbox">
       <div className="checkbox__toggle-container">
@@ -19,7 +22,7 @@ function FilterCheckbox (props) {
           <input
             className="checkbox__toggle_checkbox-off"
             type="checkbox"
-            name="toggle"            
+            name="toggle"
             checked={isToggleOn}
             onChange={handleChange}
           />

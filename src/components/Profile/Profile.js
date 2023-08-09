@@ -4,8 +4,8 @@ import Header from '../Header/Header';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useValidation } from '../../hooks/useValidation';
 
-function Profile ({ onUpdateUserData, onSignOut }) {
-  
+function Profile ({ onUpdateUserData, onSignOut, isLoading }) {
+
   const { name, email } = useContext(CurrentUserContext);
   const [isUpdatedUserData, setIsUpdatedUserData] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -34,12 +34,12 @@ function Profile ({ onUpdateUserData, onSignOut }) {
       ? setIsUpdatedUserData(true)
       : setIsUpdatedUserData(false)
   }, [values.name, name, values.email, email])
-  
+
   return (
     <>
       <Header />
       <section className="profile">
-        <div className="profile__wrapper">  
+        <div className="profile__wrapper">
           <h1 className="profile__title">Привет, {name}</h1>
           <form
             name="profile__form"
@@ -84,14 +84,14 @@ function Profile ({ onUpdateUserData, onSignOut }) {
                 className={`profile__error ${errors.email ? "profile__error_active" : ""}`}
               >{errors.email ? errors.email : "Что-то пошло не так..."}
               </span>
-            </label>       
+            </label>
           </form>
           <div className="profile__links">
             <button
               type="button"
               className={`profile__link ${isValid && isUpdatedUserData && "profile__link_type_success"}`}
               onClick={handleClickBtn}
-              disabled={isEdit ? !isValid || !isUpdatedUserData : false}
+              disabled={isLoading || isEdit ? !isValid || !isUpdatedUserData : false}
             >
               Редактировать
             </button>

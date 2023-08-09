@@ -21,17 +21,6 @@ class MainApi {
     return this._checkResponse(response);
   };
 
-  async getUser (token) {
-    const response = await this._request(`${this._baseUrl}/users/me`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      method: 'GET',
-    });
-    return response;
-  };
-
   async editUser (user, token) {
     const response = await this._request(`${this._baseUrl}/users/me`, {
       headers: {

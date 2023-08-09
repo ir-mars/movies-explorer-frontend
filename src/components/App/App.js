@@ -25,6 +25,7 @@ function App () {
   const navigate = useNavigate();
   const currentPath = location.pathname;
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingText, setIsLoadingText] = useState(true);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [statusMessageInPopup, setStatusMessage] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -46,6 +47,8 @@ function App () {
   //колбэк регистрации
   const handleRegister = async ({ name, email, password }) => {
     try {
+      setIsLoading(true)
+      setIsLoadingText("Загружаем ваши данные...")
       const data = await auth.signUp({ name, email, password });
       if (data) {
         setIsLoggedIn(true);
@@ -61,12 +64,15 @@ function App () {
       setStatusMessage(`Произошла ошибка регистрации:${err}`)
     } finally {
       setIsPopupOpen(true)
+      setIsLoading(false)
     }
   }
 
   //колбэк входа
   const handleLogin = async ({ email, password }) => {
     try {
+      setIsLoading(true)
+      setIsLoadingText("Проверяем логин и пароль...")
       const data = await auth.signIn({ email, password })
       if (data) {
         localStorage.setItem("token", data.token)
@@ -78,12 +84,15 @@ function App () {
       console.log(err);
       setIsPopupOpen(true)
       setStatusMessage(`Произошла ошибка авторизации:${err}`)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   //проверка токена
   const checkToken = (token = localStorage.getItem("token")) => {
     setIsLoading(true);
+    setIsLoadingText("Загрузка данных...")
     auth.getAuthentication(token)
       .then((res) => {
         if (res) {
@@ -120,6 +129,8 @@ function App () {
   //изменение профиля
   const handleUpdateUser = async (newUser) => {
     try {
+      setIsLoading(true)
+      setIsLoadingText("Обновление данных пользователя...")
       const token = localStorage.getItem('token');
       const updatedUserData = await mainApi.editUser(newUser, token);
       setCurrentUser(updatedUserData);
@@ -129,6 +140,7 @@ function App () {
       setStatusMessage(`Ошибка обновления данных.`)
     } finally {
       setIsPopupOpen(true)
+      setIsLoading(false)
     }
   }
 
@@ -139,7 +151,7 @@ function App () {
     }
   }, [isLoggedIn])
 
-  
+
   // фильтрация по ключу и чекбоксу
   const filterMoviesOnQueryAndCheckBox = (moviesList, query, filterBox) => {
     const foundArray = moviesList.filter(
@@ -161,6 +173,7 @@ function App () {
     }
     try {
       setIsLoading(true);
+      setIsLoadingText("Загружаем фильмы...")
       const moviesInLS = localStorage.getItem("movies");
       //если в локалстораж есть список фильмов, возьмем оттуда, если нет, то скачаем
       const movies = moviesInLS ? JSON.parse(moviesInLS) : await
@@ -287,7 +300,7 @@ function App () {
 
   // если идет загрузка покажем индикатор
   if (isLoading) {
-    return <Preloader />
+    return <Preloader text={isLoadingText} />
   }
 
   return (
@@ -323,7 +336,13 @@ function App () {
           } />
 
           <Route path="/profile" element={
-            <ProtectedRoute element={Profile} loggedIn={isLoggedIn} onSignOut={handleSignOut} onUpdateUserData={handleUpdateUser} />
+            <ProtectedRoute
+              element={Profile}
+              loggedIn={isLoggedIn}
+              onSignOut={handleSignOut}
+              onUpdateUserData={handleUpdateUser}
+              isLoading={isLoading}
+            />
           } />
 
           <Route path="/signup" element={isLoggedIn
@@ -333,7 +352,7 @@ function App () {
               onRegister={handleRegister}
             />}
           />
-          
+
           <Route path="/signin" element={isLoggedIn
             ? <Navigate to="/" />
             :
@@ -351,8 +370,8 @@ function App () {
           statusMessageInPopup={statusMessageInPopup}
         />
       </div>
-    </CurrentUserContext.Provider>    
-  )  
+    </CurrentUserContext.Provider>
+  )
 }
 
 export default App;
