@@ -1,4 +1,4 @@
-import { BASE_URL } from './constants';
+import { BASE_URL } from "./constants";
 
 class MainApi {
   constructor(options) {
@@ -47,7 +47,7 @@ class MainApi {
     return response;
   };
 
-  async getSavedCard (token) {
+  async getSavedCards (token) {
     const response = await this._request(`${this._baseUrl}/movies`, {
       headers: {
         'Content-Type': 'application/json',
