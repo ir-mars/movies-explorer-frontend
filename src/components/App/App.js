@@ -345,21 +345,8 @@ function App () {
             />
           } />
 
-          <Route path="/signup" element={isLoggedIn
-            ? <Navigate to="/" />
-            :
-            <Register
-              onRegister={handleRegister}
-            />}
-          />
-
-          <Route path="/signin" element={isLoggedIn
-            ? <Navigate to="/" />
-            :
-            <Login
-              onLogin={handleLogin}
-            />} />
-
+          <Route path="/signup" element={<Register onRegister={handleRegister} loggedIn={isLoggedIn} />} />
+          <Route path="/signin" element={<Login onLogin={handleLogin} loggedIn={isLoggedIn} />} />
           <Route path="*" element={<NotFound />} />
 
         </Routes>

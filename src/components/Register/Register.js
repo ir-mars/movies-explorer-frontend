@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Register.css';
 import Logo from '../Logo/Logo';
 import AuthForm from '../AuthForm/AuthForm';
 import Input from '../Input/Input';
 import { useValidation } from '../../hooks/useValidation';
 
-function Register ({ onRegister }) {
-  
+function Register ({ onRegister, loggedIn }) {
+
   const { values, handleChange, isValid, errors } = useValidation();
+  const navigate = useNavigate();
 
   function onSubmit () {
     onRegister(values)
@@ -17,14 +18,22 @@ function Register ({ onRegister }) {
   useEffect(() => {
     document.title = "Регистрация";
   }, [])
-  
+
+  useEffect(() => {
+    if (loggedIn) {
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 100)
+    }
+  }, [loggedIn]);
+
   return (
     <section className="auth">
       <div className="auth__wrapper">
-      <NavLink to="/">
-        <Logo />
-      </NavLink>      
-        <h2 className="auth__title">Добро пожаловать!</h2>   
+        <NavLink to="/">
+          <Logo />
+        </NavLink>
+        <h2 className="auth__title">Добро пожаловать!</h2>
         <AuthForm
           name="reg"
           onSubmit={onSubmit}
