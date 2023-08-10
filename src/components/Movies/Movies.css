@@ -1,0 +1,11 @@
+.movies {
+  width: 100%;
+  flex: 1;
+}
+
+@media screen and (max-width: 786px) {
+  .movies {
+    padding-bottom: 30px;
+  }
+}
+

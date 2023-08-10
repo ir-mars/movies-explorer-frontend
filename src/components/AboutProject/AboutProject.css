@@ -1,0 +1,157 @@
+.project {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0;
+  padding: 110px 70px 110px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.about-project {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.about-project__container {
+  width: 100%;
+  display: flex;
+  margin-top: 70px;
+  gap: 53px;  
+}
+
+.about-project__subtitle {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: black;    
+}
+
+.about-project__table-subtitle_type_first {
+  color: white;
+}
+
+.about-project__text {
+  margin: 0;
+  padding-top: 26px;
+  font-size: 14px;
+  line-height: 20px;
+  font-style: normal;
+  font-weight: 400;    
+}
+
+.about-project__table-container {
+  width: 100%;
+  display: flex;
+  margin-top: 110px;  
+}
+
+.about-project__table {
+  display: flex;
+  flex-direction: column;  
+}
+
+.about-project__table:first-of-type {
+  width: 20%;
+  background-color: black;
+}
+
+.about-project__table:last-of-type {
+  width: 80%;
+  background-color: rgba(242, 242, 242, 1);
+}
+
+.about-project__table-subtitle {
+  margin: 0;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  text-align: center;
+  color: white;      
+}
+
+.about-project__table-subtitle_type-two {
+  color: black;
+}
+
+.about-project__table-text {
+  margin: 0;
+  padding-top: 14px;
+  font-size: 14px;
+  line-height: 17px;
+  font-style: normal;
+  font-weight: 500;
+  text-align: center;
+  color: #A0A0A0;
+  background-color: rgba(255, 255, 255, 1);  
+}
+
+@media screen and (max-width: 786px) {
+  .project {
+    padding: 90px 50px 90px;
+  }
+
+  .about-project__table-container {
+    margin-top: 92px;
+  }
+
+  .about-project__text {
+    font-size: 12px;
+    line-height: 18px;    
+  }
+}
+
+@media screen and (max-width: 536px) {
+  .project {
+    padding: 70px 18px 69px;
+  }
+
+  .about-project__container {
+    margin-top: 60px;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .about-project__subtitle {
+    font-size: 18px;
+  }
+
+  .about-project__text {
+    padding-top: 16px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__table-container {
+    margin-top: 60px;
+  }
+
+  .about-project__table:first-of-type {
+    width: 36%;
+  }
+
+  .about-project__table:last-of-type {
+    width: 64%;
+  }
+
+  .about-project__table-subtitle {
+    font-size: 11px;
+    line-height: normal;
+  }
+
+  .about-project__table-text {
+    padding-top: 10px;
+    font-size: 11px;
+    line-height: normal;
+  }
+}
